@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myChart"></canvas>
+<!-- 
+<select name="">
+    <option value="intensity">Intensity</option>
+    <option value="country">Country</option>
+</select> -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script type="text/javascript">
+
+var datapart;
+
+
+//Get JSON Data
+function loadJSON(callback)
+{
+    var xhr = new XMLHttpRequest();
+    const url = "../../jsondata.json";
+	xhr.overrideMimeType("application/json");
+	xhr.open('GET', '../graphing/jsondata.json', true);
+    xhr.onreadystatechange = function()
+    {
+          
+     
+    console.log("Updating data with realtime data");
+    fetch("../graphing/jsondata.json")
+        .then(response => response.json())
+        .then(rsp => {
+            console.log("hello joker");
+            //console.log(jj);        
+        });
+    
+        
+        if (xhr.readyState == 4 && xhr.status == "200") {
+            callback(xhr.responseText);
+          
+            
+
+		}
+	};
+	xhr.send(null);
+}
+
+(function init() {
+ loadJSON(function(response) {
+  // Parse JSON string into object
+    var actual_JSON = JSON.parse(response);
+   // consumeData(actual_JSON); //Use this to consume JSON Data
+    console.log(actual_JSON);
+   // console.log(actual_JSON    );
+  
+
+
+  
+ 
+    
+// for (i = 0; i < actual_JSON.length; i++){
+//      datapart[i] = {
+//           country1 : [actual_JSON[i].country],
+//           data: [actual_JSON[i].intensity] 
+//      };
+// }
+// console.log("datapart");
+// console.log(datapart.data);
+
+// var config = {
+//    type: 'line',
+//    data: {
+//       labels: ["Graph Line"],
+//       datasets: [datapart]
+//    }
+// }
+
+
+// dLen = actual_JSON.length;
+
+// actual_JSON.array.forEach(element => {
+//     datapartdata += element.data;
+// });
+//console.log(actual_JSON.length);
+
+
+console.log("hellooooooooooooo")
+
+
+ //function helllabel(){ 
+// let la;
+var data1 = new Array(100);
+// var inten;
+for(var i=0 ;i<100;i++){
+  // actual_JSON[i].country;
+   data1[i]=actual_JSON[i].intensity;
+   // console.log(data1[i]);
+
+
+}
+
+
+// var labels = [];
+//    var values = [];
+//    actual_JSON.forEach(function(el,key){
+//     labels.push(el.country);
+//     values.push(el.intensity);
+
+
+// console.data(data1);
+
+    
+ });
+})()
+
+// console.log(actual_JSON[0].intensity);
+
+
+//*********************************************************************
+var ctx = document.getElementById('myChart').getContext('2d');
+
+// function helllabel(){ 
+// // let la;
+// var data1 = new Array(100);
+// // var inten;
+// for(var i=0 ;i<100;i++){
+//   // actual_JSON[i].country;
+//    data1=actual_JSON[i].intensity;
+//     console.log(data1);
+
+// }}
+
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    
+    // The data for our dataset
+    data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','blue','purple','pink'],
+            //labels: labels,
+           
+            datasets: [{
+                label: '# of Votes',
+                //data:values,
+                data: [1,2,12,32,23,12,32,22,9],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',    
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+
+
+            
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+</script>
+
+
+
+</body>
+
+</html>
